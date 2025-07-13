@@ -3,5 +3,21 @@ info:
   title: Your Project API
   version: 1.0.0
   description: Your project description
-paths: {}
-components: {}
+paths:
+  /api/server/select/:
+    get:
+      operationId: server_select_retrieve
+      tags:
+      - server
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
