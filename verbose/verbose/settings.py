@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     #Internal
     'account',
     'server',
+    'webchat'
 ]
 
 MIDDLEWARE = [
@@ -142,10 +143,17 @@ SPECTACULAR_SETTINGS = {
     # OTHER SETTINGS
 }
 
-CORS_ALLOWED_ORIGIN = [
-    'http://localhost:5173',
-    'http://127.0.0.1/5173'
-]
+# CORS_ALLOWED_ORIGIN = [
+#     'http://localhost:5173',
+#     'http://127.0.0.1/5173'
+# ]
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+
+CHANNEL_LAYERS = {
+    "default": {"BACKEND": "channels.layers.InMemoryChannelLayer"},
+}
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=50),
