@@ -1,9 +1,11 @@
 import React from "react";
 
 interface ColorModeContextProps {
-  toggleColorMode: () => void;
+    mode: "light" | "dark";
+    toggleColorMode: () => void;
 }
 
 export const ColorModeContext = React.createContext<ColorModeContextProps>({
-  toggleColorMode: () => {},
+    mode: "dark",
+    toggleColorMode: () => {},
 });
