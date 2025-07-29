@@ -33,11 +33,11 @@ INSTALLED_APPS = [
     #External
     'drf_spectacular',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
     #Internal
     'account',
     'server',
-    'webchat'
+    'webchat',
 ]
 
 MIDDLEWARE = [

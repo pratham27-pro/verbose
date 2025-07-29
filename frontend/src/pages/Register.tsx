@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
-import { useAuthServiceContext } from "../context/AuthContext";
+import { useAuthServiceContext } from "@/hooks/useServiceAuth"; 
 
 export default function Register() {
   const { register } = useAuthServiceContext();

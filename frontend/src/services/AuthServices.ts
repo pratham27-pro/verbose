@@ -2,12 +2,10 @@ import axios from "axios";
 import type { AuthServiceProps } from "../@types/auth-service";
 import { useState } from "react";
 import { BASE_URL } from "../config.ts";
-import { useNavigate } from "react-router-dom";
+
 
 // TODO: import from env files to be written in the urls
 export function useAuthService(): AuthServiceProps {
-
-    const navigate = useNavigate()
 
     const getInitialLoggedInValue = () => {
         const loggedIn = localStorage.getItem("isLoggedIn");
@@ -86,7 +84,6 @@ export function useAuthService(): AuthServiceProps {
         localStorage.removeItem("user_id")
         localStorage.removeItem("username");
         setIsLoggedIn(false);
-        navigate("/login")
 
         try {
             await axios.post(

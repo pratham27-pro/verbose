@@ -1,7 +1,6 @@
+import { useContext } from "react";
+import { AuthServiceContext } from "@/context/AuthContext"; 
 import type { AuthServiceProps } from "@/@types/auth-service";
-import { createContext, useContext } from "react";
-
-const AuthServiceContext = createContext<AuthServiceProps | null>(null);
 
 export function useAuthServiceContext(): AuthServiceProps {
   const context = useContext(AuthServiceContext);
@@ -9,5 +8,6 @@ export function useAuthServiceContext(): AuthServiceProps {
   if (context === null) {
     throw new Error("Error - You have to use the AuthServiceProvider");
   }
+
   return context;
 }
