@@ -1,11 +1,52 @@
-from django.shortcuts import render
-from rest_framework import viewsets
-from .models import Server
-from .serializer import ServerSerializer
-from rest_framework.response import Response
+from django.shortcuts import get_object_or_404
+from drf_spectacular.utils import extend_schema
+from rest_framework import viewsets, status
+from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError, AuthenticationFailed
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 from django.db.models import Count
+
 from .schema import server_list_docs
+from .serializer import ServerSerializer, CategorySerializer
+from .models import Server, Category
+
+class ServerMembershipViewSet(viewsets.ViewSet):
+    permission_classes = [IsAuthenticated]
+
+    def create(self, request, server_id):
+        server = get_object_or_404(Server, id=server_id)
+
+        user = request.user
+
+        if server.member.filter(id=user.id).exists:
+            return Response({
+                "error": "User is already a member"
+            }, status=status.HTTP_409_CONFLICT)
+        
+        server.member.add(user)
+        return Response({
+            "message": "User joined the server successfully"
+        }, status=status.HTTP_200_OK)
+    
+    @action(detail=False, method=["GET"])
+    def is_member(self, request, server_id=None):
+        server = get_object_or_404(Server, id=server_id)
+        user = request.user
+
+        is_member = server.member.filter(id=user.id).exists()
+
+        return Response({
+            "is_member": is_member
+        })
+    
+class CategoryListViewSet(viewsets.ViewSet):
+    queryset = Category.objects.all()
+
+    @extend_schema(responses=CategorySerializer)
+    def list(self, request):
+        serializer = CategorySerializer(self.queryset, many=True)
+        return Response(serializer.data)
 
 class ServerListViewSet(viewsets.ViewSet):
     queryset = Server.objects.all()

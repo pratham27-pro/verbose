@@ -1,5 +1,5 @@
 from asgiref.sync import async_to_sync
-from channels.generic.websocket import JsonWebSocketConsumer
+from channels.generic.websocket import JsonWebsocketConsumer
 from django.contrib.auth import get_user_model
 from server.models import Server
 
@@ -8,7 +8,7 @@ from .models import Conversation, Message
 User = get_user_model()
 
 
-class WebChatConsumer:
+class WebChatConsumer(JsonWebsocketConsumer):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.channel_id = None
