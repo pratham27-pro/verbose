@@ -29,7 +29,7 @@ class ServerMembershipViewSet(viewsets.ViewSet):
             "message": "User joined the server successfully"
         }, status=status.HTTP_200_OK)
     
-    @action(detail=False, method=["GET"])
+    @action(detail=False, methods=["GET"])
     def is_member(self, request, server_id=None):
         server = get_object_or_404(Server, id=server_id)
         user = request.user
@@ -54,7 +54,7 @@ class ServerListViewSet(viewsets.ViewSet):
     @server_list_docs
     def list(self, request):
         category = request.query_params.get("category")
-        qty = request.query_param.get("qty")
+        qty = request.query_params.get("qty")
         by_user = request.query_params.get("by_user") == "true"
         by_serverid = request.query_params.get("by_serverid")
         with_num_members = request.query_params.get("with_num_members") == "true"

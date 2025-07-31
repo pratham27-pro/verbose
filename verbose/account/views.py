@@ -68,7 +68,7 @@ class JWTSetCookiesMixing:
                 settings.SIMPLE_JWT["REFRESH_TOKEN_NAME"],
                 response.data["refresh"],
                 max_age=settings.SIMPLE_JWT["REFRESH_TOKEN_LIFETIME"],
-                httpOnly=True,
+                httponly=True,
                 samesite=settings.SIMPLE_JWT["JWT_COOKIE_SAMESITE"]
             )
 
@@ -77,7 +77,7 @@ class JWTSetCookiesMixing:
                 settings.SIMPLE_JWT["ACCESS_TOKEN_NAME"],
                 response.data["access"],
                 max_age=settings.SIMPLE_JWT["ACCESS_TOKEN_LIFETIME"],
-                httpOnly=True,
+                httponly=True,
                 samesite=settings.SIMPLE_JWT["JWT_COOKIE_SAMESITE"]
             )
             del response.data["access"]

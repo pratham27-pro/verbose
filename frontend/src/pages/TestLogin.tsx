@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuthServiceContext } from "@/hooks/useServiceAuth"; 
 import useAxiosWithJwtInterceptor from "@/helpers/jwtInterceptor";
+import { BASE_URL } from "@/config";
 
 export default function TestLogin() {
   const { isLoggedIn, logout } = useAuthServiceContext();
@@ -10,7 +11,7 @@ export default function TestLogin() {
   const getUserDetails = async () => {
     try {
       const response = await jwtAxios.get(
-        `http://127.0.0.1:42069/api/account/?user_id=1`,
+        `${BASE_URL}/account/?user_id=1`,
         { withCredentials: true }
       );
       setUsername(response.data.username);

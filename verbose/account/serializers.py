@@ -7,8 +7,8 @@ from .models import Account
 
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
-        model = "Account"
-        fields = ("username, password")
+        model = Account
+        fields = "__all__"
 
     def is_valid(self, raiseExceptions = False):
         valid = super().is_valid(raise_exception=raiseExceptions)
@@ -29,7 +29,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
-        fields = ("username")
+        fields = "__all__"
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     def get_token(cls, user):

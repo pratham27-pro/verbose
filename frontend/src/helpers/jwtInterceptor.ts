@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuthService } from "../services/AuthServices";
+import { BASE_URL } from "@/config";
 
 const useAxiosWithJwtInterceptor = () => {
   const jwtAxios = axios.create({});
@@ -18,7 +19,7 @@ const useAxiosWithJwtInterceptor = () => {
  
           try {
             const response = await axios.post(
-              "http://127.0.0.1:42069/api/token/refresh/"
+              `${BASE_URL}/token/refresh/`
             );
             if (response["status"] == 200) {
               return jwtAxios(originalRequest);

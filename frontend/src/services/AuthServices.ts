@@ -18,7 +18,7 @@ export function useAuthService(): AuthServiceProps {
         try {
             const userId = localStorage.getItem("user_id")
             const response = await axios.get(
-                `http://127.0.0.1:42069/api/account/?user_id=${userId}`,
+                `${BASE_URL}/account/?user_id=${userId}`,
                 {
                     withCredentials: true
                 }
@@ -37,7 +37,7 @@ export function useAuthService(): AuthServiceProps {
     const login = async (username: string, password: string) =>{
         try {
             const response = await axios.post(
-                "http://127.0.0.1:42069/api/token/", {
+                `${BASE_URL}/token/`, {
                     username,
                     password,
             }, { withCredentials: true }
@@ -67,7 +67,7 @@ export function useAuthService(): AuthServiceProps {
     const register = async (username: string, password: string) =>{
         try {
             const response = await axios.post(
-                "http://127.0.0.1:42069/api/register/", {
+                `${BASE_URL}/register/`, {
                     username,
                     password,
             }, { withCredentials: true }
